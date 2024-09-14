@@ -16,7 +16,7 @@ export const Avatar = ({
           size === "small" ? "text-sm" : "text-md"
         } text-gray-600 dark:text-gray-300`}
       >
-        {authorName[0]}
+        {authorName ? authorName[0] : ""}
       </span>
     </div>
   );

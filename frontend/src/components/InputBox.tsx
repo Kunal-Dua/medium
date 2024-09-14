@@ -3,7 +3,7 @@ import { ChangeEvent } from "react";
 interface LabledInputType {
   label: string;
   placeholder: string;
-  onChange: (e: ChangeEvent) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: string;
 }
 

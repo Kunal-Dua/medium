@@ -1,7 +1,6 @@
 import { AppBar } from "../components/AppBar";
 import { TextEditor } from "../components/TextEditor";
 import axios from "axios";
-import { BACKEND_URL } from "../config";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -34,7 +33,7 @@ export const Publish = () => {
             <button
               onClick={async () => {
                 const response = await axios.post(
-                  `${BACKEND_URL}/api/v1/blog`,
+                  `${import.meta.env.VITE_BACKEND_URL}/api/v1/blog`,
                   {
                     title: title,
                     content: description,

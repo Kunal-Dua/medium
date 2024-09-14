@@ -1,10 +1,9 @@
 import { Quote } from "../components/Quote";
 import { Link, useNavigate } from "react-router-dom";
-import { BACKEND_URL } from "../config";
 import { useState } from "react";
 import { SignupInput } from "@kdxdevs/medium-common";
-import axios from "axios";
 import { InputBox } from "../components/InputBox";
+import axios from "axios";
 
 export const Signup = () => {
   const [postInputs, setPostInputs] = useState<SignupInput>({
@@ -18,13 +17,15 @@ export const Signup = () => {
   async function sendRequest() {
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/api/v1/user/signup`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/signup`,
         postInputs
       );
       const token = response.data;
       localStorage.setItem("token", token);
       navigate("/blogs");
-    } catch (e) {}
+    } catch (e) {
+      alert("Error while signing up" + e);
+    }
   }
 
   return (
@@ -56,7 +57,7 @@ export const Signup = () => {
                 <InputBox
                   label="Username"
                   placeholder="John@gmail.com"
-                  onChange={(e) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setPostInputs({ ...postInputs, username: e.target.value });
                   }}
                 />

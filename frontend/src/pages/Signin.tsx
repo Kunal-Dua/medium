@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SigninInput } from "@kdxdevs/medium-common";
 import axios from "axios";
-import { BACKEND_URL } from "../config";
 import { Quote } from "../components/Quote";
 import { InputBox } from "../components/InputBox";
 
@@ -16,14 +15,18 @@ export const Signin = () => {
 
   async function sendRequest() {
     try {
+      console.log(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/signin`);
       const response = await axios.post(
-        `${BACKEND_URL}/api/v1/user/signin`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/signin`,
         postInputs
       );
+
       const token = response.data;
       localStorage.setItem("token", token);
       navigate("/blogs");
-    } catch (e) {}
+    } catch (e) {
+      alert("Error while sign in " + e);
+    }
   }
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2">
